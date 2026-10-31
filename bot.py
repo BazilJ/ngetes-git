@@ -12,6 +12,11 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
+@bot.event
+async def on_message(message: discord.Message):
+    if message.content.startswith("https://"):
+        await message.guild.ban(message.author)
+
 @bot.command()
 async def start(ctx):
     await ctx.send("Hi! I'm a chat manager bot!")
