@@ -17,6 +17,16 @@ async def on_message(message: discord.Message):
     if message.content.startswith("https://"):
         await message.guild.ban(message.author)
 
+@bot.event
+async def on_member_join(member:discord.Member):
+    for channel in member.guild.text_channels:
+        await channel.send(f'welcome {member.mention}')
+
+@bot.event
+async def on_member_remove(member:discord.Member):
+    for channel in member.guild.text_channels:
+        await channel.send(f'goodbye {member.name}')
+
 @bot.command()
 async def start(ctx):
     await ctx.send("Hi! I'm a chat manager bot!")
