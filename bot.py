@@ -15,7 +15,9 @@ async def on_ready():
 @bot.event
 async def on_message(message: discord.Message):
     if message.content.startswith("https://"):
-        await message.guild.ban(message.author)
+        await message.guild.ban(message.author) \
+        if message.author.top_role < message.guild.me.top_role \
+        else await message.channel.send("gua mana bisa ngeban ni org rolenya tinggian dia daripada gua dableg lu")
 
 @bot.event
 async def on_member_join(member:discord.Member):
